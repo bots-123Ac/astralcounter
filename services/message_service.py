@@ -2,7 +2,7 @@ from sqlalchemy import select, func, desc
 from datetime import datetime, timedelta
 import logging
 
-from database.models import MessageLog, User, Group, GroupMember, GroupMilestone
+from database.models import MessageLog, User, Group, GroupMilestone
 from database.db import async_session
 
 logger = logging.getLogger(__name__)
@@ -22,6 +22,19 @@ def _midnight_ist_utc():
     now_ist = _ist_now()
     midnight_ist = now_ist.replace(hour=0, minute=0, second=0, microsecond=0)
     return midnight_ist - IST_OFFSET
+
+
+def _group_link(group_id: int) -> str:
+    """
+    Private supergroup link banata hai.
+    Format: https://t.me/c/{id_without_-100}/1
+    """
+    gid_str = str(group_id)
+    if gid_str.startswith("-100"):
+        bare = gid_str[4:]
+        return f"https://t.me/c/{bare}/1"
+    # Fallback for normal groups
+    return f"https://t.me/c/{gid_str.lstrip('-')}/1"
 
 
 async def log_message(user_id, group_id):
@@ -52,7 +65,6 @@ async def get_top_users(limit=10):
 
 
 async def get_group_top_users(group_id, limit=10, timeframe="all"):
-    """Returns list of dicts: {user_id, name, messages}"""
     now = datetime.utcnow()
     cutoff = None
     if timeframe == "today":
@@ -98,8 +110,11 @@ async def get_group_top_users(group_id, limit=10, timeframe="all"):
         return out
 
 
-async def get_user_groups_with_counts(user_id, timeframe="all", limit=15):
-    """Returns list of dicts: {group_id, title, count}"""
+async def get_user_groups_with_counts(user_id, timeframe="all", limit=20):
+    """
+    Returns list of dicts:
+      {group_id, title, link, count}
+    """
     now = datetime.utcnow()
     cutoff = None
     if timeframe == "today":
@@ -139,16 +154,20 @@ async def get_user_groups_with_counts(user_id, timeframe="all", limit=15):
         for gid, cnt in rows:
             g = groups_map.get(gid)
             title = (g.title if g and g.title else f"ɢʀᴏᴜᴘ {gid}")
-            out.append({"group_id": gid, "title": title, "count": cnt})
+            out.append({
+                "group_id": gid,
+                "title": title,
+                "link": _group_link(gid),
+                "count": cnt,
+            })
         return out
 
 
 # ─────────────────────────────────────────────────────────
-#  MILESTONE TRACKING
+#  MILESTONE
 # ─────────────────────────────────────────────────────────
 
 def get_milestone_thresholds():
-    """300, 500, 1000, 1500, 2000, 2500, 3000, ... (every +500 after 500)"""
     thresholds = {300, 500}
     n = 1000
     while n <= 10_000_000:
@@ -170,13 +189,11 @@ async def get_today_message_count(group_id):
 
 
 async def maybe_send_milestone(bot, group_id, count):
-    """Check if `count` is a milestone for this group today, and send message."""
     if count not in get_milestone_thresholds():
         return
 
     today_str = _today_ist_str()
 
-    # Check if already sent
     async with async_session() as session:
         existing = await session.scalar(
             select(func.count(GroupMilestone.id)).where(
