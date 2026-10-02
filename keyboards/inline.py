@@ -2,6 +2,9 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from config import GROUP_LINK, CHANNEL_LINK, SUPPORT_LINK, OWNER_ID, BOT_USERNAME
 
 
+# ─────────────────────────────────────────────────────────
+#  START MENU
+# ─────────────────────────────────────────────────────────
 def start_keyboard():
     keyboard = [
         [InlineKeyboardButton(
@@ -18,6 +21,9 @@ def start_keyboard():
     return InlineKeyboardMarkup(keyboard)
 
 
+# ─────────────────────────────────────────────────────────
+#  HELP MENU
+# ─────────────────────────────────────────────────────────
 def help_keyboard():
     keyboard = [
         [
@@ -46,6 +52,9 @@ def back_keyboard():
     return InlineKeyboardMarkup(keyboard)
 
 
+# ─────────────────────────────────────────────────────────
+#  RANKINGS — Timeframe buttons
+# ─────────────────────────────────────────────────────────
 def rankings_keyboard(current="all"):
     """Timeframe buttons for /rankings (marks the active one)."""
     def mark(tf):
@@ -70,5 +79,26 @@ def rankings_keyboard(current="all"):
             f"{mark('today')}⏰ ᴛᴏᴅᴀʏ (24ʜ)",
             callback_data="rank_today"
         )],
+    ]
+    return InlineKeyboardMarkup(keyboard)
+
+
+# ─────────────────────────────────────────────────────────
+#  PROFILE — Timeframe buttons
+# ─────────────────────────────────────────────────────────
+def profile_keyboard(current="all"):
+    """Timeframe buttons for /profile (marks active)."""
+    def mark(tf):
+        return "✅ " if tf == current else ""
+
+    keyboard = [
+        [
+            InlineKeyboardButton(f"{mark('all')}📊 ᴀʟʟ ᴛɪᴍᴇ", callback_data="prof_all"),
+            InlineKeyboardButton(f"{mark('monthly')}📅 ᴍᴏɴᴛʜʟʏ", callback_data="prof_monthly"),
+        ],
+        [
+            InlineKeyboardButton(f"{mark('weekly')}📆 ᴡᴇᴇᴋʟʏ", callback_data="prof_weekly"),
+            InlineKeyboardButton(f"{mark('today')}⏰ ᴛᴏᴅᴀʏ", callback_data="prof_today"),
+        ],
     ]
     return InlineKeyboardMarkup(keyboard)
