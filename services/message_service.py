@@ -25,15 +25,11 @@ def _midnight_ist_utc():
 
 
 def _group_link(group_id: int) -> str:
-    """
-    Private supergroup link banata hai.
-    Format: https://t.me/c/{id_without_-100}/1
-    """
+    """Private supergroup ke liye clickable link."""
     gid_str = str(group_id)
     if gid_str.startswith("-100"):
         bare = gid_str[4:]
         return f"https://t.me/c/{bare}/1"
-    # Fallback for normal groups
     return f"https://t.me/c/{gid_str.lstrip('-')}/1"
 
 
@@ -110,7 +106,45 @@ async def get_group_top_users(group_id, limit=10, timeframe="all"):
         return out
 
 
-async def get_user_groups_with_counts(user_id, timeframe="all", limit=20):
+async def get_group_title(group_id: int, bot=None) -> str:
+    """
+    Group title DB se lo. Agar nahi mila toh Telegram API se fetch
+    karke DB mein save kar do.
+    """
+    async with async_session() as session:
+        result = await session.execute(
+            select(Group).where(Group.group_id == group_id)
+        )
+        group = result.scalar_one_or_none()
+        if group and group.title:
+            return group.title
+
+    # DB mein nahi hai → Telegram API se fetch karo
+    if bot:
+        try:
+            chat = await bot.get_chat(group_id)
+            title = chat.title or chat.first_name or f"ɢʀᴏᴜᴘ {group_id}"
+
+            # Save to DB
+            async with async_session() as session:
+                result = await session.execute(
+                    select(Group).where(Group.group_id == group_id)
+                )
+                g = result.scalar_one_or_none()
+                if g:
+                    g.title = title
+                else:
+                    g = Group(group_id=group_id, title=title)
+                    session.add(g)
+                await session.commit()
+            return title
+        except Exception as e:
+            logger.warning(f"Could not fetch chat {group_id}: {e}")
+
+    return f"ɢʀᴏᴜᴘ {group_id}"
+
+
+async def get_user_groups_with_counts(user_id, timeframe="all", limit=20, bot=None):
     """
     Returns list of dicts:
       {group_id, title, link, count}
@@ -144,16 +178,10 @@ async def get_user_groups_with_counts(user_id, timeframe="all", limit=20):
         if not rows:
             return []
 
-        group_ids = [r[0] for r in rows]
-        groups_result = await session.execute(
-            select(Group).where(Group.group_id.in_(group_ids))
-        )
-        groups_map = {g.group_id: g for g in groups_result.scalars().all()}
-
         out = []
         for gid, cnt in rows:
-            g = groups_map.get(gid)
-            title = (g.title if g and g.title else f"ɢʀᴏᴜᴘ {gid}")
+            # Har group ka title fetch karo (DB ya API se)
+            title = await get_group_title(gid, bot)
             out.append({
                 "group_id": gid,
                 "title": title,
