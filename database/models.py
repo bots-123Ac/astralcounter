@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, BigInteger, String, DateTime, Boolean
+from sqlalchemy import Column, Integer, BigInteger, String, DateTime
 from datetime import datetime
 from database.db import Base
 
@@ -34,12 +34,3 @@ class MessageLog(Base):
     user_id = Column(BigInteger, nullable=False)
     group_id = Column(BigInteger, nullable=False)
     timestamp = Column(DateTime, default=datetime.utcnow)
-
-class BotStats(Base):
-    __tablename__ = "bot_stats"
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    total_users = Column(Integer, default=0)
-    total_groups = Column(Integer, default=0)
-    total_messages = Column(Integer, default=0)
-    daily_active = Column(Integer, default=0)
-    updated_at = Column(DateTime, default=datetime.utcnow)
