@@ -1,4 +1,4 @@
-from sqlalchemy import select, func
+from sqlalchemy import select
 from database.models import Group, GroupMember
 from database.db import async_session
 
