@@ -63,9 +63,15 @@ def main():
         rankings_callback, pattern="^rank_"
     ))
 
-    # ── Group activity tracker (must be last) ────────────────
+    # ── Group activity tracker ───────────────────────────────
+    # Sab kuch track karega: text, sticker, gif, photo, video,
+    # voice, audio, document, video_note, poll, contact, etc.
+    # Sirf commands skip honge (jo '/' se start hoti hain).
     app.add_handler(MessageHandler(
-        filters.TEXT & ~filters.COMMAND, track_group_activity
+        ~filters.COMMAND
+        & ~filters.UpdateType.EDITED_MESSAGE
+        & ~filters.UpdateType.CHANNEL_POSTS,
+        track_group_activity
     ))
 
     logger.info("Bot starting...")
