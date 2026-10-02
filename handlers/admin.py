@@ -61,7 +61,7 @@ TIMEFRAME_LABELS = {
 }
 
 
-async def _build_profile_text(user_obj, db_user, timeframe="all"):
+async def _build_profile_text(user_obj, db_user, timeframe="all", bot=None):
     lines = [
         "👤 <b>ᴘʀᴏғɪʟᴇ</b>",
         "",
@@ -76,18 +76,18 @@ async def _build_profile_text(user_obj, db_user, timeframe="all"):
     ]
 
     groups = await get_user_groups_with_counts(
-        user_obj.id, timeframe=timeframe, limit=20
+        user_obj.id, timeframe=timeframe, limit=20, bot=bot
     )
     if not groups:
         lines.append("📭 ɴᴏ ᴀᴄᴛɪᴠɪᴛʏ ʏᴇᴛ.")
     else:
         for g in groups:
-            # Group name clickable link
             title = g["title"] or "ɢʀᴏᴜᴘ"
             link = g["link"]
             count = g["count"]
+            # Group name clickable
             lines.append(
-                f"• <a href=\"{link}\">{title}</a> — <b>{count}</b> ᴍsɢs"
+                f'• <a href="{link}">{title}</a> — <b>{count}</b> ᴍsɢs'
             )
 
     return "\n".join(lines)
@@ -100,7 +100,7 @@ async def profile_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("❌ ᴜsᴇʀ ɴᴏᴛ ғᴏᴜɴᴅ. /start ᴋᴀʀᴇɪɴ.")
         return
 
-    text = await _build_profile_text(user, db_user, "all")
+    text = await _build_profile_text(user, db_user, "all", bot=context.bot)
     await update.message.reply_text(
         text,
         reply_markup=profile_keyboard("all"),
@@ -127,7 +127,7 @@ async def profile_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.edit_message_text("❌ ᴜsᴇʀ ɴᴏᴛ ғᴏᴜɴᴅ.")
         return
 
-    text = await _build_profile_text(user, db_user, timeframe)
+    text = await _build_profile_text(user, db_user, timeframe, bot=context.bot)
     try:
         await query.edit_message_text(
             text,
