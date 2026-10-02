@@ -16,8 +16,11 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if chat.type in ["group", "supergroup"]:
         await get_or_create_group(chat.id, chat.title, user.id)
 
+    # ✅ Yahan clickable mention banaya ja raha hai
+    user_mention = f'<a href="tg://user?id={user.id}">{user.first_name}</a>'
+
     text = START_TEXT.format(
-        first_name=user.first_name or "User",
+        user_mention=user_mention,   # <-- first_name ki jagah yeh pass karo
         bot_name=BOT_NAME,
         owner_name=OWNER_NAME,
     )
@@ -33,7 +36,6 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode="HTML",
         )
     except Exception:
-        # Agar file_id expire ho gaya to fallback
         await update.message.reply_photo(
             photo=OWNER_PFP,
             caption=text,
@@ -41,6 +43,8 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode="HTML",
         )
 
+
+# Back button ke liye bhi same cheez karni hai
 async def help_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
@@ -60,8 +64,11 @@ async def help_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
     elif query.data == "back_to_start":
         user = query.from_user
+        # ✅ Yahan bhi clickable mention
+        user_mention = f'<a href="tg://user?id={user.id}">{user.first_name}</a>'
+        
         text = START_TEXT.format(
-            first_name=user.first_name or "User",
+            user_mention=user_mention,
             bot_name=BOT_NAME,
             owner_name=OWNER_NAME,
         )
