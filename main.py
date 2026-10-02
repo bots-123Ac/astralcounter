@@ -18,6 +18,7 @@ from handlers.admin import (
     broadcast_command,
     ping_command,
     profile_command,
+    profile_callback,
     mygifts_command,
     groupstats_command,
 )
@@ -48,11 +49,11 @@ def main():
     app.add_handler(CommandHandler("ping", ping_command))
     app.add_handler(CommandHandler("groupstats", groupstats_command))
 
-    # ── Owner-only commands ──────────────────────────────────
+    # ── Owner only ───────────────────────────────────────────
     app.add_handler(CommandHandler("botstats", bot_stats_command))
     app.add_handler(CommandHandler("broadcast", broadcast_command))
 
-    # ── Callback queries ─────────────────────────────────────
+    # ── Callbacks ────────────────────────────────────────────
     app.add_handler(CallbackQueryHandler(
         help_callback, pattern="^(help_menu|back_to_start)$"
     ))
@@ -62,16 +63,16 @@ def main():
     app.add_handler(CallbackQueryHandler(
         rankings_callback, pattern="^rank_"
     ))
+    app.add_handler(CallbackQueryHandler(
+        profile_callback, pattern="^prof_"
+    ))
 
-    # ── Group activity tracker ───────────────────────────────
-    # Sab kuch track karega: text, sticker, gif, photo, video,
-    # voice, audio, document, video_note, poll, contact, etc.
-    # Sirf commands skip honge (jo '/' se start hoti hain).
+    # ── Group tracker (last) ─────────────────────────────────
     app.add_handler(MessageHandler(
         ~filters.COMMAND
         & ~filters.UpdateType.EDITED_MESSAGE
         & ~filters.UpdateType.CHANNEL_POSTS,
-        track_group_activity
+        track_group_activity,
     ))
 
     logger.info("Bot starting...")
