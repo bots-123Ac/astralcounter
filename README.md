@@ -1,58 +1,142 @@
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=200&section=header&text=Astral%20x%20Counter&fontSize=48&fontColor=fff&animation=twinkling&fontAlignY=35&desc=Group%20Activity%20Bot&descAlignY=55&descSize=18" />
-</p>
+<div align="center">
 
-<h1 align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=28&duration=3000&pause=800&color=36BCF7&center=true&vCenter=true&width=700&lines=Welcome+to+Astral+x+Counter+Bot;Track+Your+Group+Activity;Compete+with+Friends;Level+Up+%26+Earn+Gifts;Built+with+%E2%9D%A4%EF%B8%8F+by+CRAZY+BOY" alt="Typing SVG" />
-</h1>
+<img src="https://capsule-render.vercel.app/api?type=venom&color=0:0f0c29,50:302b63,100:24243e&height=250&section=header&text=˹𝐀𝐬𝐭𝐫𝐚𝐥%20ꭙ%20𝐂𝐨𝐮𝐧𝐭𝐞𝐫˼&fontSize=55&fontColor=36BCF7&animation=twinkling&fontAlignY=40&desc=⚡%20Group%20Activity%20Bot%20⚡&descAlignY=62&descSize=22&stroke=36BCF7&strokeWidth=2" width="100%"/>
 
-<p align="center">
-  <a href="https://t.me/astralXcounterBot">
-    <img src="https://img.shields.io/badge/🤖_Bot-Astral_x_Counter-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" />
-  </a>
-  <a href="https://t.me/Astral_study_chest">
-    <img src="https://img.shields.io/badge/📢_Channel-Astral_Study_Chest-36BCF7?style=for-the-badge&logo=telegram&logoColor=white" />
-  </a>
-  <a href="https://t.me/+-j8FiVjAUXExMmM1">
-    <img src="https://img.shields.io/badge/💬_Support-Join_Group-25D366?style=for-the-badge&logo=telegram&logoColor=white" />
-  </a>
-</p>
+<a href="https://t.me/astralXcounterBot">
+  <img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=700&size=30&duration=2500&pause=700&color=36BCF7&center=true&vCenter=true&multiline=true&width=800&height=100&lines=%E2%9A%A1+Welcome+to+Astral+x+Counter+%E2%9A%A1;%F0%9F%94%A5+Track+%7C+Compete+%7C+Conquer+%F0%9F%94%A5;%F0%9F%8F%86+Turn+Your+Group+Into+Arena+%F0%9F%8F%86" alt="Typing SVG" />
+</a>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white" />
-  <img src="https://img.shields.io/badge/SQLAlchemy-2.0-D71F00?style=for-the-badge&logo=sqlalchemy&logoColor=white" />
-  <img src="https://img.shields.io/badge/Railway-Deploy-0B0D0E?style=for-the-badge&logo=railway&logoColor=white" />
-  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" />
-</p>
+<br>
 
----
+<a href="https://t.me/astralXcounterBot">
+  <img src="https://img.shields.io/badge/🤖%20LAUNCH%20BOT-Astral_x_Counter-36BCF7?style=for-the-badge&logo=telegram&logoColor=white&labelColor=0f0c29"/>
+</a>
+<a href="https://t.me/Astral_study_chest">
+  <img src="https://img.shields.io/badge/📢%20CHANNEL-Astral_Study_Chest-9146FF?style=for-the-badge&logo=telegram&logoColor=white&labelColor=0f0c29"/>
+</a>
+<a href="https://t.me/+-j8FiVjAUXExMmM1">
+  <img src="https://img.shields.io/badge/💬%20SUPPORT-Join_Group-25D366?style=for-the-badge&logo=telegram&logoColor=white&labelColor=0f0c29"/>
+</a>
 
-## 🌟 About
+<br><br>
 
-**˹𝐀𝐬𝐭𝐫𝐚𝐥 ꭙ 𝐂𝐨𝐮𝐧𝐭𝐞𝐫˼** is a powerful Telegram **group activity bot** inspired by the popular ChatFight bot. It tracks messages, ranks members, awards gifts, and turns your group chat into a fun competition.
+<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
-> 🎯 **Goal:** Make every message count!
+</div>
 
 ---
 
-## ✨ Features
+<div align="center">
 
-| Feature | Description |
-|---------|-------------|
-| 📊 **Message Tracking** | Counts every message per user & group |
-| 🏆 **Rankings** | See who's most active in your group |
-| 🌍 **Global Top** | Global leaderboard across all groups |
-| 🎁 **Gift System** | Reward top members with gifts |
-| 👤 **Profiles** | Personal stats, level and progress |
-| 🎨 **Stylish Fonts** | Aesthetic Unicode fonts like ᴀᴇsᴛʜᴇᴛɪᴄ |
-| 🖼️ **User PFP** | Welcome image uses your Telegram profile pic |
-| 👑 **Owner Stats** | Full bot analytics (users, groups, messages) |
+## 🎯 ᴡʜᴀᴛ ɪs ᴀsᴛʀᴀʟ x ᴄᴏᴜɴᴛᴇʀ ?
+
+</div>
+
+> **˹𝐀𝐬𝐭𝐫𝐚𝐥 ꭙ 𝐂𝐨𝐮𝐧𝐭𝐞𝐫˼** is a next-gen **Telegram Group Activity Bot** — inspired by ChatFight, built for **real competition**.  
+> Every message you send becomes a **point**. Every point becomes **rank**. Every rank becomes **glory**. 🏆
+
+<div align="center">
+<img src="https://user-images.githubusercontent.com/74038190/216122041-518ac897-8d92-4c6b-9b3f-ca01dcaf38ee.png" width="60"/>
+</div>
 
 ---
 
-## 🚀 Quick Start
+<div align="center">
 
-### 1️⃣ Clone the repo
+## ⚡ ᴘᴏᴡᴇʀ-ᴘᴀᴄᴋᴇᴅ ғᴇᴀᴛᴜʀᴇs
+
+</div>
+
+<table align="center">
+<tr>
+<td align="center" width="25%">
+<img src="https://user-images.githubusercontent.com/74038190/216122065-2f028bae-25d6-4a3c-bc9f-175394ed5011.png" width="60"/><br>
+<b>📊 Message Tracking</b><br>
+<sub>Every msg counts. Real-time updates.</sub>
+</td>
+<td align="center" width="25%">
+<img src="https://user-images.githubusercontent.com/74038190/216122041-518ac897-8d92-4c6b-9b3f-ca01dcaf38ee.png" width="60"/><br>
+<b>🏆 Live Rankings</b><br>
+<sub>See who rules the group.</sub>
+</td>
+<td align="center" width="25%">
+<img src="https://user-images.githubusercontent.com/74038190/216122069-5b8169d7-1d8e-4a13-b245-a8e4176c99f8.png" width="60"/><br>
+<b>🌍 Global Top</b><br>
+<sub>Compete across all groups.</sub>
+</td>
+<td align="center" width="25%">
+<img src="https://user-images.githubusercontent.com/74038190/216122065-2f028bae-25d6-4a3c-bc9f-175394ed5011.png" width="60"/><br>
+<b>🎁 Gift System</b><br>
+<sub>Rewards for the worthy.</sub>
+</td>
+</tr>
+<tr>
+<td align="center">
+<img src="https://user-images.githubusercontent.com/74038190/216122041-518ac897-8d92-4c6b-9b3f-ca01dcaf38ee.png" width="60"/><br>
+<b>👤 Profiles</b><br>
+<sub>Level, XP, Stats — all in one.</sub>
+</td>
+<td align="center">
+<img src="https://user-images.githubusercontent.com/74038190/216122069-5b8169d7-1d8e-4a13-b245-a8e4176c99f8.png" width="60"/><br>
+<b>🎨 Stylish Fonts</b><br>
+<sub>Aesthetic ᴜɴɪᴄᴏᴅᴇ ᴛᴇxᴛ.</sub>
+</td>
+<td align="center">
+<img src="https://user-images.githubusercontent.com/74038190/216122065-2f028bae-25d6-4a3c-bc9f-175394ed5011.png" width="60"/><br>
+<b>🖼️ User PFP</b><br>
+<sub>Your face on the welcome.</sub>
+</td>
+<td align="center">
+<img src="https://user-images.githubusercontent.com/74038190/216122041-518ac897-8d92-4c6b-9b3f-ca01dcaf38ee.png" width="60"/><br>
+<b>👑 Owner Stats</b><br>
+<sub>Full bot analytics.</sub>
+</td>
+</tr>
+</table>
+
+---
+
+<div align="center">
+
+## 🎮 ᴄᴏᴍᴍᴀɴᴅ ᴀʀsᴇɴᴀʟ
+
+</div>
+
+<div align="center">
+
+| 🎯 Public Commands | 👑 Owner Only |
+|:---:|:---:|
+| `/start` — Wake the beast | `/botstats` — Full analytics |
+| `/help` — Command list | `/broadcast` — Message all users |
+| `/stats` — Your personal war stats | |
+| `/rankings` — Group leaderboard | |
+| `/top` — Global hall of fame | |
+| `/profile` — Your identity card | |
+| `/mygifts` — Your treasures | |
+| `/ping` — Bot pulse | |
+| `/groupstats` — Group intel | |
+
+</div>
+
+---
+
+<div align="center">
+
+## 🚀 ǫᴜɪᴄᴋ ᴅᴇᴘʟᴏʏ
+
+</div>
+
 ```bash
+# 1️⃣ Clone the arsenal
 git clone https://github.com/yourusername/astral-counter-bot.git
 cd astral-counter-bot
+
+# 2️⃣ Install the weapons
+pip install -r requirements.txt
+
+# 3️⃣ Configure secrets
+echo "BOT_TOKEN=your_token_here" > .env
+echo "OWNER_ID=7790607144" >> .env
+
+# 4️⃣ Launch the beast
+python main.py
