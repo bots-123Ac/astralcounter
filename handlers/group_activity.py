@@ -2,7 +2,11 @@ from telegram import Update
 from telegram.ext import ContextTypes
 
 from services.user_service import increment_user_messages, get_or_create_user
-from services.group_service import increment_group_messages, update_group_member
+from services.group_service import (
+    increment_group_messages,
+    update_group_member,
+    get_or_create_group,
+)
 from services.message_service import (
     log_message,
     get_today_message_count,
@@ -34,7 +38,7 @@ async def track_group_activity(update: Update, context: ContextTypes.DEFAULT_TYP
     if user.is_bot:
         return
 
-    # ── Commands ko skip karo (text aur caption dono check) ──
+    # ── Commands ko skip karo ────────────────────────────────
     text = message.text or message.caption or ""
     if text.startswith("/"):
         return
@@ -51,8 +55,11 @@ async def track_group_activity(update: Update, context: ContextTypes.DEFAULT_TYP
     user_id = user.id
     group_id = chat.id
 
-    # ── Save user & counters ─────────────────────────────────
+    # ── Save user + group (title bhi update karo har baar) ───
     await get_or_create_user(user_id, user.username, user.first_name)
+    await get_or_create_group(group_id, chat.title, user_id)
+
+    # ── Counters ─────────────────────────────────────────────
     await increment_user_messages(user_id)
     await increment_group_messages(group_id)
     await update_group_member(group_id, user_id)
