@@ -1,5 +1,5 @@
 from sqlalchemy import select, func
-from database.models import MessageLog, User, Group, BotStats
+from database.models import MessageLog, User, Group
 from database.db import async_session
 
 async def log_message(user_id, group_id):
@@ -23,5 +23,16 @@ async def get_top_users(limit=10):
     async with async_session() as session:
         result = await session.execute(
             select(User).order_by(User.total_messages.desc()).limit(limit)
+        )
+        return result.scalars().all()
+
+async def get_group_top_users(group_id, limit=10):
+    from database.models import GroupMember
+    async with async_session() as session:
+        result = await session.execute(
+            select(GroupMember)
+            .where(GroupMember.group_id == group_id)
+            .order_by(GroupMember.messages_in_group.desc())
+            .limit(limit)
         )
         return result.scalars().all()
