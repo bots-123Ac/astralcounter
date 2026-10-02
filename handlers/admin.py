@@ -6,7 +6,10 @@ from utils.decorators import owner_only
 from database.db import async_session
 from database.models import User, Group
 from services.user_service import get_user
-from services.message_service import get_user_groups_with_counts
+from services.message_service import (
+    get_user_groups_with_counts,
+    get_today_message_count,
+)
 from keyboards.inline import profile_keyboard
 
 
@@ -72,13 +75,20 @@ async def _build_profile_text(user_obj, db_user, timeframe="all"):
         "",
     ]
 
-    groups = await get_user_groups_with_counts(user_obj.id, timeframe=timeframe, limit=15)
+    groups = await get_user_groups_with_counts(
+        user_obj.id, timeframe=timeframe, limit=20
+    )
     if not groups:
         lines.append("📭 ɴᴏ ᴀᴄᴛɪᴠɪᴛʏ ʏᴇᴛ.")
     else:
         for g in groups:
+            # Group name clickable link
             title = g["title"] or "ɢʀᴏᴜᴘ"
-            lines.append(f"• <b>{title}</b> — {g['count']} ᴍsɢs")
+            link = g["link"]
+            count = g["count"]
+            lines.append(
+                f"• <a href=\"{link}\">{title}</a> — <b>{count}</b> ᴍsɢs"
+            )
 
     return "\n".join(lines)
 
@@ -152,14 +162,15 @@ async def groupstats_command(update: Update, context: ContextTypes.DEFAULT_TYPE)
         return
 
     async with async_session() as session:
-        result = await session.execute(select(Group).where(Group.group_id == chat.id))
+        result = await session.execute(
+            select(Group).where(Group.group_id == chat.id)
+        )
         group = result.scalar_one_or_none()
 
     if not group:
         await update.message.reply_text("📭 ɴᴏ ᴅᴀᴛᴀ ʏᴇᴛ.")
         return
 
-    from services.message_service import get_today_message_count
     today_count = await get_today_message_count(chat.id)
 
     text = (
